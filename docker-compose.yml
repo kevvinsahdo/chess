@@ -1,0 +1,41 @@
+version: '3.1'
+services:
+  chess:
+    build: .
+    image: progweb/chess:development
+    command: npm start
+    container_name: progweb_chess
+    environment:
+      - APP_PORT=3999
+    depends_on:
+      - mysql
+    networks: 
+      - progweb
+    ports:
+      - 3999:3999
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+  mysql:
+    container_name: progweb_common_mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_PORT=3306
+    image: mysql:5.6
+    networks:
+      - progweb
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    restart: unless-stopped
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+networks:
+  progweb:
+
+volumes:
+  mysql-data:
+    driver: local
