@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "myapp",
-    "password": "senha123",
+    "username": "root",
+    "password": null,
     "database": "myapp",
-    "host": "127.0.0.1",
+    "host": "mysql",
     "dialect": "mysql"
   },
   "test": {

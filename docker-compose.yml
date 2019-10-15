@@ -18,7 +18,7 @@ services:
       - .:/app
       - /app/node_modules
   mysql:
-    container_name: progweb_common_mysql
+    container_name: progweb_mysql
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_PORT=3306
@@ -27,8 +27,6 @@ services:
       - progweb
     ports:
       - 3307:3306
-    expose:
-      - 3306
     restart: unless-stopped
     volumes:
       - mysql-data:/var/lib/mysql
