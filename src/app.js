@@ -16,12 +16,6 @@ app.use(morgan('short'));
 // Routers
 app.use(router);
 
-// Images files
-app.use('/img', [
-    express.static('/public/img')
-
-])
-
 // Sass
 app.use(sass({
     src: 'public/scss',
@@ -32,15 +26,20 @@ app.use(sass({
     force: true,
 }))
 
+// Images files
+app.use('/img',
+    express.static('public/img')
+)
 
 // Static js files
 app.use('/js', [
     express.static('node_modules/jquery/dist/'), 
     express.static('node_modules/popper.js/dist/umd/'), 
     express.static('node_modules/bootstrap/dist/js/'), 
+    express.static('node_modules/@chrisoakman/dist/'),
+    express.static('node_modules/chess.js/'),
     express.static('public/js')
 ])
-
 
 // Views engine
 app.engine('handlebars', handlebars({
