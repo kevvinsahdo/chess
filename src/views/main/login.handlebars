@@ -1,0 +1,23 @@
+<h1>Acessar conta</h1>
+<p>Deseja criar uma conta? Basta preencher o formulário abaixo</p>
+
+<div class="form-group">
+    <label for="exampleInputEmail1">Email</label>
+    <input id="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+
+    <label for="exampleInputPassword1">Password</label>
+    <input id="password" type="password" class="form-control" placeholder="Password">
+
+    <fieldset>
+        <div class="form-check disabled">
+            <label class="form-check-label">
+                <input id="termOfService" class="form-check-input" type="checkbox" value="">
+                Mantenha-me logado
+            </label>
+        </div>
+    </fieldset>
+
+    <input type="hidden" name="_csrf" value={{csrf}}/>
+
+    <button type="submit" class="btn btn-primary">Acessar</button>
+</div>
