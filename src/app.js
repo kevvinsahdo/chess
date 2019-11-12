@@ -7,11 +7,20 @@ const handlebars = require('express-handlebars');
 const morgan = require('morgan');
 const router = require('./routes');
 const sass = require('node-sass-middleware');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 
 const app = express(); 
 
+
 // Logger
 app.use(morgan('short'));
+
+// Cookie Parser
+app.use(cookieParser());
+
+// CSRF
+app.use(csrf({ cookie: true }));
 
 // Routers
 app.use(router);
