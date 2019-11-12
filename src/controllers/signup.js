@@ -4,7 +4,9 @@ const signup = (req, res) => {
     { id: 2, name: "CC"}
   ]
 
-  res.render('main/signup', { courses })
+  let csrf = req.csrfToken();
+
+  res.render('main/signup', { courses, csrf })
 
 }
 
