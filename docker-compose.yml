@@ -31,6 +31,20 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  mysql-web:
+    container_name: progweb_mysql_web
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    image: phpmyadmin/phpmyadmin:4.7
+    networks:
+      - progweb
+    ports:
+      - 13307:80
+    restart: unless-stopped
+
 networks:
   progweb:
 
