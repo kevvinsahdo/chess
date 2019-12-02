@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Matches', {
+    return queryInterface.createTable('match', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,13 +9,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_user_1: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'user',
+          key: 'id'
+        }
       },
       id_user_2: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'user',
+          key: 'id'
+        }
       },
       winner: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'user',
+          key: 'id'
+        }
       },
       fen: {
         type: Sequelize.STRING
@@ -31,6 +43,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Matches');
+    return queryInterface.dropTable('match');
   }
 };
