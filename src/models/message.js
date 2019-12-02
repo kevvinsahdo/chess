@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
   });
   Message.associate = function(models) {
-    // associations can be defined here
+    Message.belongsTo(models.User, {foreing_key: 'id_user', as: 'user'});
+    Message.belongsTo(models.Match, {foreing_key: 'id_match', as: 'match'});
   };
   return Message;
 };

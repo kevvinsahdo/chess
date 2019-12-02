@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     fen: DataTypes.STRING
   }, {
     underscored: true,
+    tableName: 'match'
   });
   Match.associate = function(models) {
-    // associations can be defined here
   };
+  
   return Match;
 };

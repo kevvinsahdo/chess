@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {
     underscored: true,
+    tableName: 'area'
   });
   Area.associate = function(models) {
     // associations can be defined here

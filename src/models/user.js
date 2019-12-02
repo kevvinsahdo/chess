@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     id_course: DataTypes.INTEGER
   }, {
     underscored: true,
+    tableName: 'user'
   });
   User.associate = function(models) {
-    // associations can be defined here
+
   };
   return User;
 };

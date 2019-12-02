@@ -7,9 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     id_area: DataTypes.INTEGER
   }, {
     underscored: true,
+    tableName: 'course'
   });
-  Course.associate = function(models) {
-    // associations can be defined here
+
+  Course.associate = function (models) {
+    Course.belongsTo(models.Area, { foreignKey: 'id_area', as: 'area'});
   };
+
   return Course;
 };
