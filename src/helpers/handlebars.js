@@ -6,4 +6,8 @@ const toUpper = (value) => {
     return value.toUpperCase(); 
 }
 
-module.exports = { toLower, toUpper };
+const isEqual = (value1, value2) => {
+    return value1 == value2;
+}
+
+module.exports = { toLower, toUpper, isEqual };
