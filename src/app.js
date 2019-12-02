@@ -8,7 +8,10 @@ const morgan = require('morgan');
 const router = require('./routes');
 const sass = require('node-sass-middleware');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const csrf = require('csurf');
+const session = require('express-session');
+const uuid = require('uuid');
 
 const app = express(); 
 
@@ -19,11 +22,30 @@ app.use(morgan('short'));
 // Cookie Parser
 app.use(cookieParser());
 
-// CSRF
-app.use(csrf({ cookie: true }));
+// Body Parser
+app.use(bodyParser.json({ limit: '64mb' }));
+app.use(bodyParser.urlencoded({ limit: '64mb', extended: true }));
+
+app.use(session({
+    genid: (req) => {
+        return uuid();
+    },
+    secret: 'PROGWEB',
+    resave: false,
+    saveUninitialized: true,
+}));
+
+
+// // CSRF
+// app.use(csrf({ cookie: true }));
 
 // Routers
 app.use(router);
+
+// CSS
+app.use('/css', [
+    express.static('node_modules/@chrisoakman/chessboardjs/dist/'),
+]);
 
 // Sass
 app.use(sass({
@@ -40,12 +62,16 @@ app.use('/img',
     express.static('public/img')
 )
 
+app.use('/webfonts',
+    express.static('public/webfonts')
+)
+
 // Static js files
 app.use('/js', [
     express.static('node_modules/jquery/dist/'), 
     express.static('node_modules/popper.js/dist/umd/'), 
     express.static('node_modules/bootstrap/dist/js/'), 
-    express.static('node_modules/@chrisoakman/dist/'),
+    express.static('node_modules/@chrisoakman/chessboardjs/dist/'),
     express.static('node_modules/chess.js/'),
     express.static('public/js')
 ])
