@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col">
+        <h1>Adicionar Curso</h1>
+    </div>
+</div>
+<form method="POST" action="/courses/create">
+    <fieldset>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Sigla</label>
+            <input name="acronym" class="form-control" placeholder="Exemplo: EE01">
+
+            <label for="exampleInputPassword1">Nome</label>
+            <input name="name" class="form-control"
+                placeholder="Engenharia ...">
+
+            <label for="exampleTextarea">Descrição</label>
+            <textarea class="form-control" name="description" rows="3"></textarea>
+            <fieldset class="form-group">
+                <legend>Area de conhecimento</legend>
+                {{#each areas}}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        {{#if (isEqual @index 0)}}
+                        <input id={{toLower this.name}} name="area" type="radio" class="form-check-input"
+                            value={{this.id}} checked="">
+                        {{this.name}}
+                        {{else}}
+                        <input id={{toLower this.name}} name="area" type="radio" class="form-check-input"
+                            value={{this.id}}>
+                        {{this.name}}
+                        {{/if}}
+                    </label>
+                </div>
+                {{/each}}
+            </fieldset>
+
+            <input type="hidden" name="_csrf" value={{csrf}} />
+
+            <button type="submit" class="btn btn-primary">Adicionar Curso</button>
+        </div>
+    </fieldset>
+</form>

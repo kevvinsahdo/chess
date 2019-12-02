@@ -3,35 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="/css/main.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Chess Game</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/#">Chess App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav mr-auto my-2 my-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/signup">Sign Up</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    {{{body}}}
-    <script src="/js/jquery.min.js"> </script> 
+    <link type="text/css" rel="stylesheet" href="/css/chessboard-1.0.0.min.css">
+    <link type="text/css" rel="stylesheet" href="/css/main.css">
+    <script src="/js/jquery.min.js"> </script>
     <script src="/js/popper.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/chess.min.js"></script>    
+    <script src="/js/chessboard-1.0.0.js"></script>  
+</head>
+<body>
+    <div id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/#">Chess App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/courses">Cursos</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/ranking">Ranking</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        {{{body}}}
+        <footer id="footer">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <ul class="list-unstyled">
+                        <li class="float-lg-right"><a href="#top">Back to top</a></li>
+                        <li><a href="https://blog.bootswatch.com" onclick="pageTracker._link(this.href); return false;">Blog</a>
+                        </li>
+                        <li><a href="https://blog.bootswatch.com/rss/">RSS</a></li>
+                        <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
+                        <li><a href="https://github.com/thomaspark/bootswatch/">GitHub</a></li>
+                        <li><a href="../help/#api">API</a></li>
+                        <li><a href="../help/#donate">Donate</a></li>
+                    </ul>
+                    <p>Made by <a href="https://thomaspark.co">Thomas Park</a>.</p>
+                    <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT
+                            License</a>.</p>
+                    <p>Based on <a href="https://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a
+                            href="https://fontawesome.com/" rel="nofollow">Font Awesome</a>. Web fonts from <a
+                            href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>
+
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

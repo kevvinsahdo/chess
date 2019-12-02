@@ -1,36 +1,43 @@
 <h1>Criar conta</h1>
 <p>Deseja criar uma conta? Basta preencher o formulário abaixo</p>
 
-<div class="form-group">
-    <label for="exampleInputEmail1">Nome</label>
-    <input id="name" type="text" class="form-control" placeholder="Your name here.">
+<form method="POST" action="/signup">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nome</label>
+        <input name="name" type="text" class="form-control" placeholder="Your
+            name here.">
 
-    <label for="exampleInputEmail1">Email</label>
-    <input id="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+        <label for="exampleInputEmail1">Email</label>
+        <input name="email" type="email" class="form-control"
+            aria-describedby="emailHelp" placeholder="Enter email">
 
-    <label for="exampleSelect1">Curso</label>
-    <select id="selectCourse" class="form-control">
-        {{#each courses}}
-        <option value={{this.id}}>{{this.name}}</option>
-        {{/each}}
-    </select>
+        <label for="exampleSelect1">Curso</label>
+        <select name="selectCourse" class="form-control">
+            {{#each courses}}
+            <option value={{this.id}}>{{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <label for="exampleInputPassword1">Senha</label>
-    <input id="password" type="password" class="form-control" placeholder="Password">
+        <label for="exampleInputPassword1">Senha</label>
+        <input name="password" type="password" class="form-control"
+            placeholder="Password">
 
-    <label for="exampleInputPassword1">Confirmar senha</label>
-    <input id="confirmPassword" type="password" class="form-control" placeholder="Password">
+        <label for="exampleInputPassword1">Confirmar senha</label>
+        <input name="confirmPassword" type="password" class="form-control"
+            placeholder="Password">
 
-    <fieldset>
-        <div class="form-check disabled">
-            <label class="form-check-label">
-                <input id="termOfService" class="form-check-input" type="checkbox" value="" disabled="">
-                Eu concordo com os termos de serviço.
-            </label>
-        </div>
-    </fieldset>
+        <fieldset>
+            <div class="form-check disabled">
+                <label class="form-check-label">
+                    <input name="termOfService" class="form-check-input"
+                        type="checkbox" value="">
+                    Eu concordo com os termos de serviço.
+                </label>
+            </div>
+        </fieldset>
 
-    <input type="hidden" name="_csrf" value={{csrf}} />
+        <input type="hidden" name="_csrf" value={{csrf}} />
 
-    <button type="submit" class="btn btn-primary">Criar conta</button>
-</div>
+        <button type="submit" class="btn btn-primary">Criar conta</button>
+    </div>
+</form>
