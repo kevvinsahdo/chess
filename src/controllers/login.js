@@ -1,7 +1,6 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 
-
 const login = async (req, res) => {
   // let csrf = req.csrfToken();
 
@@ -19,7 +18,6 @@ const loginAction = async (req, res) => {
     bcrypt.compare(req.body.password, user.password, (err, ok) => {
       if(ok) {
         req.session.user = user;
-        console.log(req.session);
         res.redirect('/');
       } else {
         res.redirect('/login');
