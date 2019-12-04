@@ -4,10 +4,13 @@
 </div>
 
 <script>
+    const socket = io();
     const game = new Chess();
     const color = '{{color}}';
-    const fen = 'start';
-    const match = '{{match}}';
+    let fen = 'start';
+    {{#if match.fen}}
+      fen = '{{match.fen}}';
+    {{/if}}
 
     game.load(fen); // fen é a posição das peças no tabuleiro
 
@@ -46,6 +49,14 @@
       });
       // movimento ilegal, vamos retroceder a peça para a posição original
       if (move === null) return 'snapback'
+
+      socket.emit('move', {
+        match: {{match.id}},
+        fen: game.fen(),
+        source: source,
+        target: target
+      })
+ 
       // **** Usar SOCKET.IO para enviar o movimento para o adversário **** // 
       updateStatus();
     }
@@ -78,4 +89,18 @@
       }
       document.getElementById('status').innerHTML = status;
     }
+
+    socket.on('move', function(move) {
+      if (move.match == {{match.id}}) {
+        board.move(move.source + '-' + move.target);
+
+        game.move({
+          from: move.source,
+          to: move.target,
+          promotion: 'q'
+        })
+      }
+
+      updateStatus();
+    });
 </script>

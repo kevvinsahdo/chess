@@ -2,19 +2,28 @@
 require('app-module-path').addPath(__dirname);
 global.appRoot = require('path').resolve(__dirname);
 
+const bodyParser = require('body-parser');
+const cors = require('cors')
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const express = require('express'); 
+const events = require('./events');
 const handlebars = require('express-handlebars');
 const morgan = require('morgan');
 const router = require('./routes');
 const sass = require('node-sass-middleware');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const csrf = require('csurf');
 const session = require('express-session');
 const uuid = require('uuid');
 
 const app = express(); 
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
+// Cors
+app.use(cors());
+
+// Socket Events
+events(io);
 
 // Logger
 app.use(morgan('short'));
@@ -87,6 +96,7 @@ app.set('view engine', 'handlebars');
 app.set('views', 'src/views');
 
 
-app.listen(process.env.APP_PORT, () => { 
+
+http.listen(process.env.APP_PORT, () => { 
     console.log('Express app iniciada na porta ' + process.env.APP_PORT); 
 });
