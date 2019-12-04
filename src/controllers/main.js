@@ -6,14 +6,35 @@ const index = async (req, res) => {
     let user = req.session.user;
     let myMatches = await Match.findAll({
         where: {
-            [op.or] : [
+            [op.or]: [
                 { id_user_1: user.id },
                 { id_user_2: user.id },
-            ]
+            ],
+            winner: null,
         }
     });
 
-    res.render('main/index', { myMatches });
+    let waitingMatches = await Match.findAll({
+        where: {
+            [op.or]: [
+                {
+                    id_user_1: null,
+                    id_user_2: {
+                        [op.ne]: user.id 
+                    }
+                },
+                {
+                    id_user_2: null,
+                    id_user_1: {
+                        [op.ne]: user.id
+                    }
+                },
+            ],
+            winner: null
+        }
+    });
+
+    res.render('main/index', { myMatches, waitingMatches });
 };
 
 const about = async (req, res) => {
