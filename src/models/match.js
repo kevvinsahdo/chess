@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
     tableName: 'match'
   });
+
   Match.associate = function(models) {
+    Match.belongsTo(models.User, { as: 'user_1', foreignKey: 'id_user_1' });
+    Match.belongsTo(models.User, { as: 'user_2', foreignKey: 'id_user_2' });
+    Match.belongsTo(models.User, { as: 'winnerUser', foreignKey: 'winner' });
   };
   
   return Match;
