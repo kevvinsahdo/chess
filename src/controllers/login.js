@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Course } = require('../models');
 const bcrypt = require('bcrypt');
 
 const login = async (req, res) => {
@@ -11,7 +11,8 @@ const loginAction = async (req, res) => {
   let user = await User.findOne({
     where: {
       email: req.body.email
-    }
+    },
+    include: [ {model: Course, as: 'course'}],
   });
 
   if (user) {

@@ -1,4 +1,4 @@
-const { Match } = require('../models');
+const { Match, User } = require('../models');
 const Sequelize = require('sequelize');
 const op = Sequelize.Op;
 
@@ -11,7 +11,11 @@ const index = async (req, res) => {
                 { id_user_2: user.id },
             ],
             winner: null,
-        }
+        },
+        include: [
+            { model: User, as: 'user_1' },
+            { model: User, as: 'user_2' },
+        ]
     });
 
     let waitingMatches = await Match.findAll({
@@ -31,7 +35,11 @@ const index = async (req, res) => {
                 },
             ],
             winner: null
-        }
+        },
+        include: [
+            { model: User, as: 'user_1' },
+            { model: User, as: 'user_2' },
+        ]
     });
 
     res.render('main/index', { myMatches, waitingMatches });
