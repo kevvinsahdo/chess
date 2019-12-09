@@ -5,13 +5,14 @@
             opção <b>Nova Partida</b> do menu superior. Essa aplicação foi
             desenvolvida para servir de modelo para o Trabalho Prático da
             disciplina Programação Web 2. Caso encontre algum problema na
-            aplicação, por favor avise o prof. David Fernandes. </p>
+            aplicação: ¯\_(ツ)_/¯ hehehe </p>
     </div>
     <div class="col-3">
         <img src="/img/chess-clipart.png" alt="">
     </div>
 </div>
 <script> const board = [];</script>
+{{#if myMatches}}
 <h2>Minhas partidas:</h2>
 <div class="row">
     {{#each myMatches}}
@@ -19,6 +20,19 @@
         <a href="/match/{{this.id}}">
             <div id='board{{this.id}}'></div>
         </a>
+        <div class="small-info">
+            <span class="white">
+                <i class="fas fa-chess-king"></i>
+            </span>
+            {{this.user_1.name}}
+            <br>
+            {{#if this.user_2}}
+            <span class="black">
+                <i class="fas fa-chess-king"></i>
+            </span>
+            {{this.user_2.name}}
+            {{/if}}
+        </div>
     </div>
     <script>
     board[{{this.id}}] = Chessboard('board{{this.id}}', {
@@ -32,6 +46,8 @@
     </script>
     {{/each}}
 </div>
+{{/if}}
+{{#if waitingMatches}}
 <h2>Usuários aguardando oponentes:</h2>
 <div class="row">
     {{#each waitingMatches}}
@@ -39,6 +55,19 @@
         <a href="/match/{{this.id}}">
             <div id='board{{this.id}}'></div>
         </a>
+        <div class="small-info">
+            <span class="white">
+                <i class="fas fa-chess-king"></i>
+            </span>
+            {{this.user_1.name}}
+            <br>
+            {{#if this.user_2}}
+            <span class="black">
+                <i class="fas fa-chess-king"></i>
+            </span>
+            {{this.user_2.name}}
+            {{/if}}
+        </div>
     </div>
     <script>
     board[{{this.id}}] = Chessboard('board{{this.id}}', {
@@ -52,3 +81,4 @@
     </script>
     {{/each}}
 </div>
+{{/if}}
