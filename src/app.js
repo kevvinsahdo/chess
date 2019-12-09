@@ -12,18 +12,25 @@ const handlebars = require('express-handlebars');
 const morgan = require('morgan');
 const router = require('./routes');
 const sass = require('node-sass-middleware');
-const session = require('express-session');
+const Session = require('express-session');
 const uuid = require('uuid');
+const sharedsession = require('express-socket.io-session');
 
 const app = express(); 
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
+const session = Session({
+    genid: (req) => {
+        return uuid();
+    },
+    secret: 'PROGWEB',
+    resave: false,
+    saveUninitialized: true,
+});
+
 // Cors
 app.use(cors());
-
-// Socket Events
-events(io);
 
 // Logger
 app.use(morgan('short'));
@@ -35,15 +42,14 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: '64mb' }));
 app.use(bodyParser.urlencoded({ limit: '64mb', extended: true }));
 
-app.use(session({
-    genid: (req) => {
-        return uuid();
-    },
-    secret: 'PROGWEB',
-    resave: false,
-    saveUninitialized: true,
-}));
+app.use(session);
 
+io.use(sharedsession(session, {
+    autoSave: true
+}))
+
+// Socket Events
+events(io);
 
 // // CSRF
 // app.use(csrf({ cookie: true }));
