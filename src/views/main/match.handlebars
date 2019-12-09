@@ -1,7 +1,9 @@
+<br>
 <div class="chess-board">
     <div id="board" style="width: 500px"></div>
     <div id="status">A vez é do jogador <b>branco</b>.</div>
 </div>
+<br>
 
 <script>
     const socket = io();
@@ -16,7 +18,7 @@
 
     const board = Chessboard('board', {
       draggable: true,
-      orientation: (color == 'w') ? 'white' : 'black',
+      orientation: (color == 'white') ? 'white' : 'black',
       position: fen,
       moveSpeed: 'slow',
       pieceTheme: '/img/chesspieces/wikipedia/{piece}.png',
@@ -29,8 +31,8 @@
       // nao permitir o movimento de peças em caso de game over
       if (game.game_over()) return false;
       // permitir apenas o movimento de peças de sua própria cor
-      if ((color === 'w' && piece.search(/^b/) !== -1) ||
-        (color === 'b' && piece.search(/^w/) !== -1)) {
+      if ((color === 'white' && piece.search(/^b/) !== -1) ||
+        (color === 'black' && piece.search(/^w/) !== -1)) {
         return false
       }
       // o jogador só pode mover peças caso seja sua vez de jogar
@@ -71,9 +73,14 @@
       if (game.turn() === 'b') {
         moveColor = '<b>preto</b>'
       }
+
       // checkmate?
       if (game.in_checkmate()) {
-        status = 'É xeque-mate! Vitória do jogador ' + moveColor + '!'
+        status = 'É xeque-mate! Vitória do jogador ' + moveColor + '!';
+        socket.emit('checkmate', {
+          match: {{match.id}},
+          winner: game.turn()
+        })
       }
       // empate? (draw)
       else if (game.in_draw()) {
@@ -103,4 +110,6 @@
 
       updateStatus();
     });
+    
+    updateStatus();
 </script>
