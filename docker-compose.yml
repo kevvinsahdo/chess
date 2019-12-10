@@ -6,13 +6,13 @@ services:
     command: npm start
     container_name: progweb_chess
     environment:
-      - APP_PORT=3999
+      - APP_PORT=4567
     depends_on:
       - mysql
     networks: 
       - progweb
     ports:
-      - 3999:3999
+      - 4567:4567
     restart: unless-stopped
     volumes:
       - .:/app
